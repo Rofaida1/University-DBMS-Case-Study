@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DB_USER="UNI"
+DB_PASSWORD="1234"
+DB_SID="xe"
+
+# Backup Directory
+BACKUP_DIR="uni_backup"
+
+# Timestamp for Backup File
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+
+# Export (Backup) Command
+EXPDP_COMMAND="expdp $DB_USER/$DB_PASSWORD@$DB_SID DIRECTORY=$BACKUP_DIR DUMPFILE=${DB_USER}_DB_backup_${TIMESTAMP}.dmp LOGFILE=${DB_USER}_DB_backup_log_${TIMESTAMP}.log"
+
+# Execute Backup
+echo "Starting Oracle Database Backup..."
+eval $EXPDP_COMMAND
+
+# Check the backup result
+if [ $? -eq 0 ]; then
+  echo "Backup completed successfully."
+else
+  echo "Backup failed. Check the log for details."
+fi
