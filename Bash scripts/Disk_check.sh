@@ -1,4 +1,3 @@
-#! /usr/bin/bash
 #!/bin/bash
 export DISPLAY=:0
 # Set the threshold for disk space (in percentage)
